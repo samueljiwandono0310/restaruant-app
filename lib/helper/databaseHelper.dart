@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 final String tableNameUser = "use_profile";
 final String tableReservation = "reservation";
 class DatabaseHelper {
-  Database _database;
+  static Database _database;
   static DatabaseHelper _databaseHelper;
   DatabaseHelper._createInstance();
 
@@ -32,33 +32,23 @@ class DatabaseHelper {
       onCreate: (db, version) {
         db.execute('''
           create table $tableNameUser (
-            ${UserModel().id} integer primary key autoincrement, 
-            ${UserModel().username} TEXT not null,
-            ${UserModel().nickName} TEXT not null,
-            ${UserModel().dateOfBird} DATETIME not null,
-            ${UserModel().gender} TEXT not null,
-            ${UserModel().address} TEXT not null,
-            ${UserModel().nationality} TEXT not null,
-            ${UserModel().password} TEXT not null)
-          )
-        ''');
-
-         db.execute('''
-          create table $tableReservation (
-            ${UserModel().id} integer primary key autoincrement, 
-            ${UserModel().username} text not null,
-            ${UserModel().nickName} text not null,
-            ${UserModel().dateOfBird} text not null,
-            ${UserModel().gender} text not null,
-            ${UserModel().address} text not null,
-            ${UserModel().nationality} text not null,
-            ${UserModel().password} text not null)
-          )
+            id integer primary key autoincrement, 
+            userName text not null,
+            nickname text not null,
+            dateOfBird text not null,
+            gender text not null,
+            address text not null,
+            nationality text not null,
+            password text not null)
         ''');
       },
-
-
     );
     return database;
   }
+
+  void insertTableUser(UserModel userModel) async {
+    var db = await this.database;
+    var result = await db.insert(tableNameUser, userModel.toMap());
+    print('result: $result');
+  } 
 }

@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class StaticWidget {
   static Widget formText({@required String hintText, @required TextEditingController controller}) {
     return TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
+      inputFormatters: [BlacklistingTextInputFormatter(" ")],
+      keyboardType: TextInputType.text,
       controller: controller,
+      autofocus: false,
+      focusNode: FocusNode(),
       decoration: InputDecoration(
         hintText: hintText,
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -15,7 +18,7 @@ class StaticWidget {
     );
   }
 
-  static Widget boxValue({@required String hintText}) {
+  static Widget boxValue({@required String hintText, bool focused}) {
     return Container(
       padding: EdgeInsets.fromLTRB(20.0, 12.5, 20.0, 12.5),
       decoration: BoxDecoration(
@@ -28,7 +31,7 @@ class StaticWidget {
       child: Text(
         hintText,
         style: TextStyle(
-          color: Colors.black.withOpacity(0.65),
+          color: !focused ?Colors.black.withOpacity(0.65) : Colors.black,
           fontSize: 16.0
         ),
       ),
@@ -37,8 +40,10 @@ class StaticWidget {
 
   static Widget formPassword({@required String hintText, @required TextEditingController controller}) {
     return TextFormField(
+      inputFormatters: [BlacklistingTextInputFormatter(" ")],
       autofocus: false,
       obscureText: true,
+      focusNode: FocusNode(),
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
