@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/constant/constant..dart';
+import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(Duration(seconds: 5)).then((_) {
-      Navigator.of(context).pushNamedAndRemoveUntil('login-screen', (Route<dynamic> route) => false);
+      Get.offNamedUntil("login-screen", (route) => false);
     });
     super.initState();
   }
@@ -48,9 +49,10 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: Text(
                           "ASD Restaurant",
                           style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18.0),
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18.0,
+                          ),
                         ),
                       )
                     ],
