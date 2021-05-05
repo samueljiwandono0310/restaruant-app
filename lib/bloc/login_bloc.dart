@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:restaurant_app/helper/databaseHelper.dart';
 import 'package:restaurant_app/helper/pref_helper.dart';
 import 'package:restaurant_app/helper/pref_key.dart';
@@ -27,6 +28,9 @@ class LoginBloc {
               print(
                   "result : ${value.id} , ${value.userName}, ${value.password} "),
             });
+    Future.delayed(Duration(seconds: 5)).then((_) {
+      Get.offNamedUntil("main-screen", (route) => false);
+    });
   }
 
   void _setCredential(

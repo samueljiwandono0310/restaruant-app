@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/screens/login_screen/login_screen.dart';
+import 'package:restaurant_app/screens/main_screen/main_screen.dart';
 import 'package:restaurant_app/screens/registration_screen/registration_screen.dart';
 import 'package:restaurant_app/screens/splash_screen/splash_screen.dart';
 
@@ -12,6 +13,8 @@ class NavigationRoutes {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case 'registration-screen':
         return MaterialPageRoute(builder: (_) => RegistrationScreen());
+      case 'main-screen':
+        return MaterialPageRoute(builder: (_) => MainScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -1,4 +1,4 @@
-import 'package:restaurant_app/model/list_restaurant_model.dart';
+import 'package:restaurant_app/model/restauran_model.dart';
 import 'package:restaurant_app/model/user_model.dart';
 
 class DummyData {
@@ -257,4 +257,55 @@ class DummyData {
       nickName: "aaa",
       password: "aaa",
       userName: "aaa");
+
+  static var restaurantList = [
+    RestaurantData(
+      id: "1",
+      restaurantImage: "assets/dummy_pic.jpg",
+      restaurantName: "Restaurant ASD 1",
+      restaurantRating: 5,
+    ),
+    RestaurantData(
+      id: "2",
+      restaurantImage: "assets/dummy_pic.jpg",
+      restaurantName: "Restaurant ASD 2",
+      restaurantRating: 4,
+    ),
+    RestaurantData(
+      id: "3",
+      restaurantImage: "assets/dummy_pic.jpg",
+      restaurantName: "Restaurant ASD 3",
+      restaurantRating: 1,
+    ),
+    RestaurantData(
+      id: "4",
+      restaurantImage: "assets/dummy_pic.jpg",
+      restaurantName: "Restaurant ASD 4",
+      restaurantRating: 3,
+    ),
+    RestaurantData(
+      id: "5",
+      restaurantImage: "assets/dummy_pic.jpg",
+      restaurantName: "Restaurant ASD 5",
+      restaurantRating: 2,
+    ),
+    RestaurantData(
+      id: "6",
+      restaurantImage: "assets/dummy_pic.jpg",
+      restaurantName: "Restaurant ASD 6",
+      restaurantRating: 5,
+    ),
+    RestaurantData(
+      id: "7",
+      restaurantImage: "assets/dummy_pic.jpg",
+      restaurantName: "Restaurant ASD 7",
+      restaurantRating: 3,
+    ),
+    RestaurantData(
+      id: "8",
+      restaurantImage: "assets/dummy_pic.jpg",
+      restaurantName: "Restaurant ASD 8",
+      restaurantRating: 2,
+    ),
+  ].toList();
 }
