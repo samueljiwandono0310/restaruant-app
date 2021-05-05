@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:restaurant_app/dummy/dummy_data.dart';
 import 'package:restaurant_app/model/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 final String tableNameUser = "use_profile";
 final String tableReservation = "reservation";
+
 class DatabaseHelper {
   static Database _database;
   static DatabaseHelper _databaseHelper;
@@ -18,6 +20,7 @@ class DatabaseHelper {
 
   Future<Database> get database async {
     if (_database == null) {
+      print("get in fuction database");
       _database = await initializeDatabase();
     }
     return _database;
@@ -44,6 +47,9 @@ class DatabaseHelper {
         ''');
       },
     );
+
+    // insertTableUser(DummyData.injectUser);
+
     return database;
   }
 
@@ -51,12 +57,14 @@ class DatabaseHelper {
     var db = await this.database;
     var result = await db.insert(tableNameUser, userModel.toMap());
     print('result: $result');
-  } 
+  }
 
-  Future<UserModel> findUserNameAndPassword({@required String userName , @required String password}) async {
+  Future<UserModel> findUserNameAndPassword(
+      {@required String userName, @required String password}) async {
     var db = await this.database;
-    var result = await db.rawQuery("SELECT * FROM $tableNameUser WHERE userName = '$userName' and password = '$password'");
-    if(result.length > 0) {
+    var result = await db.rawQuery(
+        "SELECT * FROM $tableNameUser WHERE userName = '$userName' and password = '$password'");
+    if (result.length > 0) {
       return UserModel.fromMap(result.first);
     }
     return null;

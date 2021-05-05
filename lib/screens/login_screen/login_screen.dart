@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_app/bloc/login_bloc.dart';
 import 'package:restaurant_app/helper/databaseHelper.dart';
+import 'package:restaurant_app/helper/pref_helper.dart';
+import 'package:restaurant_app/helper/pref_key.dart';
 import 'package:restaurant_app/widgets/static_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -55,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
               StaticWidget.sizeBox(),
               _buttonLogin(),
               StaticWidget.sizeBox(),
-              _buttonRegister()
+              !_isValid ? _buttonRegister() : SizedBox()
             ],
           ),
         ),
@@ -77,13 +81,17 @@ class _LoginScreenState extends State<LoginScreen> {
           width: double.infinity,
           height: 50.0,
           child: Center(
-            child: !_isValid ? Text(
-              "Login",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ) : CircularProgressIndicator(backgroundColor: Colors.black,),
+            child: !_isValid
+                ? Text(
+                    "Login",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  )
+                : CircularProgressIndicator(
+                    backgroundColor: Colors.black,
+                  ),
           ),
         ),
       ),
@@ -127,14 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _errorMessage = "";
         _isValid = true;
       });
-
-      DatabaseHelper()
-          .findUserNameAndPassword(
-              userName: _userNameController.text,
-              password: _passwordController.text)
-          .then((value) => {
-                print("result : ${value.id} , ${value.userName}, ${value.password} "),
-              });
+      loginBloc.doInsertDataBase(_userNameController.text, _passwordController.text);
     }
   }
 }

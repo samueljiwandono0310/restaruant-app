@@ -1,3 +1,4 @@
+import 'package:restaurant_app/model/list_restaurant_model.dart';
 import 'package:restaurant_app/model/user_model.dart';
 
 class DummyData {
@@ -248,7 +249,7 @@ class DummyData {
     "Zimbabwe"
   ].toList();
 
-  static final injectUser = UserModel(
+  static var injectUser = UserModel(
       address: "jln.raya bekasi km 17 no 28",
       dateOfBird: "03-10-1995",
       gender: "male",

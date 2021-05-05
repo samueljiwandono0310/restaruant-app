@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:restaurant_app/bloc/registration_bloc.dart';
 import 'package:restaurant_app/constant/constant..dart';
 import 'package:restaurant_app/dummy/dummy_data.dart';
 import 'package:restaurant_app/helper/databaseHelper.dart';
@@ -279,17 +281,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         _isValid = "";
         _validation = true;
       });
-
-     var userModel = UserModel(
-        userName: _userNameController.text,
-        gender: _gender,
-        dateOfBird: _dateTimeValue,
-        address: _addressController.text,
-        nationality: _nationality,
-        nickName: _nickNameController.text,
-        password: _userPasswordController.text,
+      registrationBloc.registrationAction(
+        _userNameController.text,
+        _nickNameController.text,
+        _dateTimeValue,
+        _gender,
+        _addressController.text,
+        _nationality,
+        _userPasswordController.text,
       );
-      DatabaseHelper().insertTableUser(userModel);
     }
   }
 }
