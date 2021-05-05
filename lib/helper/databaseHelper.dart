@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:restaurant_app/model/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -51,4 +52,13 @@ class DatabaseHelper {
     var result = await db.insert(tableNameUser, userModel.toMap());
     print('result: $result');
   } 
+
+  Future<UserModel> findUserNameAndPassword({@required String userName , @required String password}) async {
+    var db = await this.database;
+    var result = await db.rawQuery("SELECT * FROM $tableNameUser WHERE userName = '$userName' and password = '$password'");
+    if(result.length > 0) {
+      return UserModel.fromMap(result.first);
+    }
+    return null;
+  }
 }

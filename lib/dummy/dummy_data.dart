@@ -253,7 +253,7 @@ class DummyData {
       dateOfBird: "03-10-1995",
       gender: "male",
       nationality: "Indonesia",
-      nickName: "samuel",
-      password: "Pretest123!",
-      userName: "samueljiwandono");
+      nickName: "aaa",
+      password: "aaa",
+      userName: "aaa");
 }

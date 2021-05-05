@@ -185,7 +185,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget _buttonRegister() {
     return Container(
       child: InkWell(
-        onTap: () => {doLogin()},
+        onTap: () => {doRegister()},
         child: Container(
           decoration: BoxDecoration(
             color: Colors.blueAccent,
@@ -247,7 +247,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     );
   }
 
-  void doLogin() {
+  void doRegister() {
     if (_userNameController.text.isEmpty ||
         _nickNameController.text.isEmpty ||
         _addressController.text.isEmpty ||

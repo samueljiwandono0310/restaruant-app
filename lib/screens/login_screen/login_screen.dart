@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_app/helper/databaseHelper.dart';
 import 'package:restaurant_app/widgets/static_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _userNameController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
+  String _errorMessage = "";
+  bool _isValid = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +38,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               StaticWidget.sizeBox(),
-              StaticWidget.formText(hintText: "Username", controller: _userNameController),
+              StaticWidget.formText(
+                  hintText: "Username", controller: _userNameController),
               StaticWidget.sizeBox(),
-              StaticWidget.formPassword(hintText: "Password", controller: _passwordController),
+              StaticWidget.formPassword(
+                  hintText: "Password", controller: _passwordController),
+              _errorMessage.isNotEmpty ? StaticWidget.sizeBox() : SizedBox(),
+              _errorMessage.isNotEmpty
+                  ? Container(
+                      child: Text(
+                        _errorMessage,
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    )
+                  : SizedBox(),
               StaticWidget.sizeBox(),
               _buttonLogin(),
-              _space(),
+              StaticWidget.sizeBox(),
               _buttonRegister()
             ],
           ),
@@ -49,16 +63,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  static Widget _space() {
-    return SizedBox(
-      height: 20.0,
-    );
-  }
-
-  static Widget _buttonLogin() {
+  Widget _buttonLogin() {
     return Container(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          doLogin();
+        },
         child: Container(
           decoration: BoxDecoration(
             color: Colors.blueAccent,
@@ -67,13 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
           width: double.infinity,
           height: 50.0,
           child: Center(
-            child: Text(
+            child: !_isValid ? Text(
               "Login",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
               ),
-            ),
+            ) : CircularProgressIndicator(backgroundColor: Colors.black,),
           ),
         ),
       ),
@@ -105,5 +115,26 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void doLogin() {
+    if (_userNameController.text.isEmpty || _passwordController.text.isEmpty) {
+      setState(() {
+        _errorMessage = "* Email and password is required!";
+      });
+    } else {
+      setState(() {
+        _errorMessage = "";
+        _isValid = true;
+      });
+
+      DatabaseHelper()
+          .findUserNameAndPassword(
+              userName: _userNameController.text,
+              password: _passwordController.text)
+          .then((value) => {
+                print("result : ${value.id} , ${value.userName}, ${value.password} "),
+              });
+    }
   }
 }
