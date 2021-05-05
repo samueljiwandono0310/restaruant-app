@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:restaurant_app/dummy/dummy_data.dart';
+import 'package:restaurant_app/screens/main_screen/detail/detail_main_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -7,10 +10,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  void _onItemTapped() {
-    print("object");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,61 +28,73 @@ class _MainScreenState extends State<MainScreen> {
           shrinkWrap: true,
           itemCount: DummyData.restaurantList.length,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
-              elevation: 8.0,
-              margin: new EdgeInsets.symmetric(
-                horizontal: 10.0,
-                vertical: 6.0,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20.0)),
-                child: ListTile(
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 10.0,
-                  ),
-                  leading: Container(
-                    padding: EdgeInsets.only(right: 12.0),
-                    decoration: new BoxDecoration(
-                      border: new Border(
-                        right: new BorderSide(
-                          width: 1.0,
-                          color: Colors.white24,
-                        ),
-                      ),
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  CupertinoPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) => DetailMainScreen(
+                      index: index,
                     ),
-                    child: Image.asset(
-                        DummyData.restaurantList[index].restaurantImage),
                   ),
-                  title: Text(
-                    DummyData.restaurantList[index].restaurantName,
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Row(
-                    children: <Widget>[
-                      Icon(Icons.linear_scale, color: Colors.yellowAccent),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      Text(
-                        "${DummyData.restaurantList[index].restaurantRating}",
-                        style: TextStyle(
-                          color: Colors.black,
+                );
+              },
+              child: Card(
+                elevation: 8.0,
+                margin: new EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 6.0,
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 10.0,
+                    ),
+                    leading: Container(
+                      padding: EdgeInsets.only(right: 12.0),
+                      decoration: new BoxDecoration(
+                        border: new Border(
+                          right: new BorderSide(
+                            width: 1.0,
+                            color: Colors.white24,
+                          ),
                         ),
                       ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      Icon(Icons.star_outline, color: Colors.yellowAccent)
-                    ],
-                  ),
-                  trailing: Icon(
-                    Icons.keyboard_arrow_right,
-                    color: Colors.white,
-                    size: 30.0,
+                      child: Image.asset(
+                          DummyData.restaurantList[index].restaurantImage),
+                    ),
+                    title: Text(
+                      DummyData.restaurantList[index].restaurantName,
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Row(
+                      children: <Widget>[
+                        Icon(Icons.linear_scale, color: Colors.yellowAccent),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        Text(
+                          "${DummyData.restaurantList[index].restaurantRating}",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        Icon(Icons.star_outline, color: Colors.yellowAccent)
+                      ],
+                    ),
+                    trailing: Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Colors.white,
+                      size: 30.0,
+                    ),
                   ),
                 ),
               ),
@@ -93,7 +104,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          print("object");
+          Get.toNamed('reservation-history-screen');
         },
         child: Container(
           margin: EdgeInsets.all(10.0),
