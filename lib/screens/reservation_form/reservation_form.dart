@@ -7,7 +7,7 @@ import 'package:restaurant_app/widgets/static_widget.dart';
 class ReservationForm extends StatefulWidget {
   final restauranId;
   ReservationForm({Key key, this.restauranId});
-  
+
   @override
   _ReservationFormState createState() => _ReservationFormState();
 }
@@ -15,6 +15,7 @@ class ReservationForm extends StatefulWidget {
 class _ReservationFormState extends State<ReservationForm> {
   String _dateTime;
   int _seatNumber;
+  bool _isProcessing = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +59,9 @@ class _ReservationFormState extends State<ReservationForm> {
                 ),
                 child: Center(
                   child: Text(
-                    _seatNumber == null ?"Choose Seat reservation" : "seat number: ${_seatNumber.toString()}",
+                    _seatNumber == null
+                        ? "Choose Seat reservation"
+                        : "seat number: ${_seatNumber.toString()}",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
                   ),
@@ -104,7 +107,11 @@ class _ReservationFormState extends State<ReservationForm> {
       ),
       bottomNavigationBar: GestureDetector(
         onTap: () {
-          reservationBloc.doSaveReservation(_seatNumber, _dateTime, widget.restauranId);
+          setState(() {
+            _isProcessing = true;
+          });
+          reservationBloc.doSaveReservation(
+              _seatNumber, _dateTime, widget.restauranId);
         },
         child: Container(
           margin: EdgeInsets.all(10.0),
@@ -117,13 +124,15 @@ class _ReservationFormState extends State<ReservationForm> {
             ),
           ),
           child: Center(
-            child: Text(
-              "Reserve Now!",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+            child: !_isProcessing
+                ? Text(
+                    "Reserve Now!",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                : CircularProgressIndicator(),
           ),
         ),
       ),
