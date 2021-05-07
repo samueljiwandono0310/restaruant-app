@@ -258,7 +258,7 @@ class DummyData {
       nationality: "Indonesia",
       nickName: "user_test",
       password: "password",
-      userName: "user_test");
+      userName: "admin");
 
   static var restaurantList = [
     RestaurantData(

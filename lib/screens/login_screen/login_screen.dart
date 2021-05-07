@@ -125,34 +125,32 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void doLogin() {
+  void doLogin() async {
     if (_userNameController.text.isEmpty || _passwordController.text.isEmpty) {
       setState(() {
         _errorMessage = "* Email and password is required!";
       });
     } else {
-      setState(() {
-       DatabaseHelper()
-            .findUserNameAndPassword(
-              userName: _userNameController.text,
-              password: _passwordController.text,
-            )
-            .then((value) => {
-                  if (value.id == null)
-                    {
-                      _errorMessage = "your account not registered",
-                      _isValid = false,
-                    }
-                  else
-                    {
-                      _errorMessage = "",
-                      _isValid = true,
-                      loginBloc.setCredential(
-                        value.id,
-                      )
-                    }
-                });
-      });
+      final result = await DatabaseHelper().findUserNameAndPassword(
+        userName: _userNameController.text,
+        password: _passwordController.text,
+      );
+
+      if (result.toString() == "null"){
+        setState(() {
+          _errorMessage = "your account not registered";
+          _isValid = false;
+        });
+      } else {
+        setState(() {
+          _errorMessage = "";
+          _isValid = true;
+        });
+
+        loginBloc.setCredential(
+          result.id,
+        );
+      }
     }
   }
 }
