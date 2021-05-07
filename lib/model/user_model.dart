@@ -10,7 +10,7 @@ class UserModel {
         this.password,
     });
 
-    int id;
+    String id;
     String userName;
     String nickName;
     String dateOfBird;
@@ -19,15 +19,15 @@ class UserModel {
     String nationality;
     String password;
 
-    factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
-        id: json["id"],
-        userName: json["userName"],
-        nickName: json["nickName"],
-        dateOfBird: json["dateOfBird"],
-        gender: json["gender"],
-        address: json["address"],
-        nationality: json["nationality"],
-        password: json["password"],
+    factory UserModel.fromMap(Map<String, dynamic> map) => UserModel(
+        id: map["id"],
+        userName: map["userName"],
+        nickName: map["nickName"],
+        dateOfBird: map["dateOfBird"],
+        gender: map["gender"],
+        address: map["address"],
+        nationality: map["nationality"],
+        password: map["password"],
     );
 
     Map<String, dynamic> toMap() => {

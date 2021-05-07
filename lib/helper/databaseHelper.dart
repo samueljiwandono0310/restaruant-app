@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:restaurant_app/dummy/dummy_data.dart';
 import 'package:restaurant_app/model/user_model.dart';
+import 'package:restaurant_app/model/user_reservation.dart';
 import 'package:sqflite/sqflite.dart';
 
-final String tableNameUser = "use_profile";
+final String tableNameUser = "user_profile";
 final String tableReservation = "reservation";
 
 class DatabaseHelper {
@@ -36,7 +39,7 @@ class DatabaseHelper {
       onCreate: (db, version) {
         db.execute('''
           create table $tableNameUser (
-            id integer primary key autoincrement, 
+            id text primary key, 
             userName text not null,
             nickname text not null,
             dateOfBird text not null,
@@ -45,18 +48,30 @@ class DatabaseHelper {
             nationality text not null,
             password text not null)
         ''');
+
+        db.execute('''
+          create table $tableReservation (
+            reservationId text primary key, 
+            userId text not null,
+            restauranId integer not null,
+            seatNumber integer not null,
+            reservationDate text not null)
+        ''');
       },
     );
-
-    // insertTableUser(DummyData.injectUser);
-
     return database;
   }
 
   void insertTableUser(UserModel userModel) async {
     var db = await this.database;
     var result = await db.insert(tableNameUser, userModel.toMap());
-    print('result: $result');
+    print('insert tabel: $result');
+  }
+
+  void insertTableReservation(ReservationModel reservationModel) async {
+    var db = await this.database;
+    var result = await db.insert(tableReservation, reservationModel.toMap());
+    print('insert tabel reservation: $result');
   }
 
   Future<UserModel> findUserNameAndPassword(
@@ -65,8 +80,33 @@ class DatabaseHelper {
     var result = await db.rawQuery(
         "SELECT * FROM $tableNameUser WHERE userName = '$userName' and password = '$password'");
     if (result.length > 0) {
+      print(jsonEncode(result.first.toString()));
       return UserModel.fromMap(result.first);
     }
     return null;
+  }
+
+  Future<String> findNickNameFromId({@required String id}) async {
+    var db = await this.database;
+    var result =
+        await db.rawQuery("SELECT * FROM $tableNameUser WHERE id = '$id'");
+    if (result.length > 0) {
+      print(jsonEncode(result.first.toString()));
+      final data = UserModel.fromMap(result.first);
+      return data.userName;
+    }
+  }
+
+  Future<List<ReservationModel>> getAllDataReservation() async {
+    var db = await this.database;
+    final List<Map<String, dynamic>> result = await db.rawQuery("SELECT * FROM $tableReservation");
+    return List.generate(result.length, (index) {
+      return ReservationModel(
+          reservationDate: result[index]['reservationDate'],
+          reservationId: result[index]['reservationId'],
+          restauranId: result[index]['restauranId'],
+          seatNumber: result[index]['seatNumber'],
+          userId: result[index]['userId']);
+    });
   }
 }

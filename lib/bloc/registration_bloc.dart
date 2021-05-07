@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:restaurant_app/helper/databaseHelper.dart';
 import 'package:restaurant_app/model/user_model.dart';
+import 'package:uuid/uuid.dart';
 
 class RegistrationBloc {
   static final RegistrationBloc _singleton = new RegistrationBloc._internal();
@@ -17,6 +18,7 @@ class RegistrationBloc {
     String password,
   ) {
     var userModel = UserModel(
+      id: Uuid().v4().toString(),
       userName: username,
       gender: gender,
       dateOfBird: dateOfBird,

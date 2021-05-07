@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/config/routes.dart';
 import 'package:get/get.dart';
+import 'package:restaurant_app/dummy/dummy_data.dart';
 import 'package:restaurant_app/helper/databaseHelper.dart';
 import 'package:restaurant_app/screens/splash_screen/splash_screen.dart';
 
@@ -16,6 +17,7 @@ class _AppState extends State<App> {
     _database
         .initializeDatabase()
         .then((value) => {print("------initialize database success")});
+    _database.insertTableUser(DummyData.injectUser);
     super.initState();
   }
 

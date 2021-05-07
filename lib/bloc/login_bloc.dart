@@ -9,67 +9,14 @@ class LoginBloc {
   factory LoginBloc() => _singleton;
   LoginBloc._internal();
 
-  void doInsertDataBase(String userName, String password) {
-    DatabaseHelper()
-        .findUserNameAndPassword(
-          userName: userName,
-          password: password,
-        )
-        .then((value) => {
-              _setCredential(
-                value.id,
-                value.userName,
-                value.nickName,
-                value.dateOfBird,
-                value.gender,
-                value.address,
-                value.nationality,
-              ),
-              print(
-                  "result : ${value.id} , ${value.userName}, ${value.password} "),
-            });
+  setCredential(
+    String id,
+  ) async {
+    print(id);
+    PrefHelper().setString(describeEnum(PrefsKey.id), id ?? "",);
     Future.delayed(Duration(seconds: 5)).then((_) {
       Get.offNamedUntil("main-screen", (route) => false);
     });
-  }
-
-  void _setCredential(
-    int id,
-    String username,
-    String nickName,
-    String dateOfBird,
-    String gender,
-    String address,
-    String nationality,
-  ) {
-    PrefHelper().setInt(
-      describeEnum(PrefsKey.id),
-      id ?? "",
-    );
-    PrefHelper().setString(
-      describeEnum(PrefsKey.userName),
-      username ?? "",
-    );
-    PrefHelper().setString(
-      describeEnum(PrefsKey.nickName),
-      nickName ?? "",
-    );
-    PrefHelper().setString(
-      describeEnum(PrefsKey.dateOfBird),
-      dateOfBird ?? "",
-    );
-    PrefHelper().setString(
-      describeEnum(PrefsKey.gender),
-      gender ?? "",
-    );
-    PrefHelper().setString(
-      describeEnum(PrefsKey.address),
-      address ?? "",
-    );
-    PrefHelper().setString(
-      describeEnum(PrefsKey.nationality),
-      nationality ?? "",
-    );
   }
 }
 

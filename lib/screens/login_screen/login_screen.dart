@@ -132,10 +132,27 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     } else {
       setState(() {
-        _errorMessage = "";
-        _isValid = true;
+       DatabaseHelper()
+            .findUserNameAndPassword(
+              userName: _userNameController.text,
+              password: _passwordController.text,
+            )
+            .then((value) => {
+                  if (value.id == null)
+                    {
+                      _errorMessage = "your account not registered",
+                      _isValid = false,
+                    }
+                  else
+                    {
+                      _errorMessage = "",
+                      _isValid = true,
+                      loginBloc.setCredential(
+                        value.id,
+                      )
+                    }
+                });
       });
-      loginBloc.doInsertDataBase(_userNameController.text, _passwordController.text);
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:restaurant_app/model/restauran_model.dart';
 import 'package:restaurant_app/model/user_model.dart';
+import 'package:uuid/uuid.dart';
 
 class DummyData {
   static final gender = [
@@ -250,62 +251,71 @@ class DummyData {
   ].toList();
 
   static var injectUser = UserModel(
-      address: "jln.raya bekasi km 17 no 28",
+      id: Uuid().v4(),
+      address: "jln.test no 28",
       dateOfBird: "03-10-1995",
       gender: "male",
       nationality: "Indonesia",
-      nickName: "aaa",
-      password: "aaa",
-      userName: "aaa");
+      nickName: "user_test",
+      password: "password",
+      userName: "user_test");
 
   static var restaurantList = [
     RestaurantData(
-      id: 1,
-      restaurantImage: "assets/dummy_pic.jpg",
-      restaurantName: "Restaurant ASD 1",
-      restaurantRating: 5,
-    ),
+        id: 1,
+        restaurantImage: "assets/dummy_pic.jpg",
+        restaurantName: "Restaurant ASD 1",
+        restaurantRating: 5,
+        restaurantDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"),
     RestaurantData(
-      id: 2,
-      restaurantImage: "assets/dummy_pic.jpg",
-      restaurantName: "Restaurant ASD 2",
-      restaurantRating: 4,
-    ),
+        id: 2,
+        restaurantImage: "assets/dummy_pic.jpg",
+        restaurantName: "Restaurant ASD 2",
+        restaurantRating: 4,
+        restaurantDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"),
     RestaurantData(
-      id: 3,
-      restaurantImage: "assets/dummy_pic.jpg",
-      restaurantName: "Restaurant ASD 3",
-      restaurantRating: 1,
-    ),
+        id: 3,
+        restaurantImage: "assets/dummy_pic.jpg",
+        restaurantName: "Restaurant ASD 3",
+        restaurantRating: 1,
+        restaurantDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"),
     RestaurantData(
-      id: 4,
-      restaurantImage: "assets/dummy_pic.jpg",
-      restaurantName: "Restaurant ASD 4",
-      restaurantRating: 3,
-    ),
+        id: 4,
+        restaurantImage: "assets/dummy_pic.jpg",
+        restaurantName: "Restaurant ASD 4",
+        restaurantRating: 3,
+        restaurantDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"),
     RestaurantData(
-      id: 5,
-      restaurantImage: "assets/dummy_pic.jpg",
-      restaurantName: "Restaurant ASD 5",
-      restaurantRating: 2,
-    ),
+        id: 5,
+        restaurantImage: "assets/dummy_pic.jpg",
+        restaurantName: "Restaurant ASD 5",
+        restaurantRating: 2,
+        restaurantDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"),
     RestaurantData(
-      id: 6,
-      restaurantImage: "assets/dummy_pic.jpg",
-      restaurantName: "Restaurant ASD 6",
-      restaurantRating: 5,
-    ),
+        id: 6,
+        restaurantImage: "assets/dummy_pic.jpg",
+        restaurantName: "Restaurant ASD 6",
+        restaurantRating: 5,
+        restaurantDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"),
     RestaurantData(
-      id: 7,
-      restaurantImage: "assets/dummy_pic.jpg",
-      restaurantName: "Restaurant ASD 7",
-      restaurantRating: 3,
-    ),
+        id: 7,
+        restaurantImage: "assets/dummy_pic.jpg",
+        restaurantName: "Restaurant ASD 7",
+        restaurantRating: 3,
+        restaurantDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"),
     RestaurantData(
-      id: 8,
-      restaurantImage: "assets/dummy_pic.jpg",
-      restaurantName: "Restaurant ASD 8",
-      restaurantRating: 2,
-    ),
+        id: 8,
+        restaurantImage: "assets/dummy_pic.jpg",
+        restaurantName: "Restaurant ASD 8",
+        restaurantRating: 2,
+        restaurantDescription:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"),
   ].toList();
 }
